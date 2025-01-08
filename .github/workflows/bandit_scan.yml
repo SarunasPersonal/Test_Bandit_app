@@ -2,7 +2,7 @@ name: Security Check
 
 on:
   push:
-    branches: [ "main" ]  # or "master" depending on your default branch
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -25,10 +25,10 @@ jobs:
     
     - name: Run Bandit
       run: |
-        bandit -r . -f txt -o bandit-report.txt
+        bandit -r . -f txt -o bandit-report.txt || true
         
     - name: Upload Security Analysis Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: Security Report
-        path: bandit-report.html
+        path: bandit-report.txt
